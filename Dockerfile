@@ -1,13 +1,8 @@
-FROM alpine:latest
-
-RUN apk add --update py2-pip
-
-COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-
-COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates/
-
-EXPOSE 5000
-
-CMD ["python", "/usr/src/app/app.py"]
+# Derived from official mysql image (our base image)
+FROM mysql
+# Add a database
+ENV MYSQL_DATABASE company
+# Add the content of the sql-scripts/ directory to your image
+# All scripts in docker-entrypoint-initdb.d/ are automatically
+# executed during container startup
+COPY ./sql-scripts/ /docker-entrypoint-initdb.d/]
