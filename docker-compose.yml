@@ -1,18 +1,14 @@
 version: "3"
 services:
-  web:
+  database:
     image: dpproject/testapp:latest
     deploy:
-      replicas: 4
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 50M
+      replicas: 1
       restart_policy:
         condition: on-failure
     ports:
-      - "8888:5000"
+      - "9000:3306"
     networks:
-      - webnet
+      - dbnet
 networks:
-  webnet:
+  dbnet:
